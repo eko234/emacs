@@ -86,7 +86,7 @@ There are two things you can do about this warning:
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
-(display-time-mode 1)
+;;(display-time-mode 1)
 (setq column-number-mode t)
 (set-face-foreground 'highlight nil)
 (global-hl-line-mode 1)
@@ -132,6 +132,8 @@ There are two things you can do about this warning:
 
 ;; Python hooks
 (add-hook 'python-mode-hook 'company-mode)
+(setq python-shell-interpreter "python3")
+(setq python-indent-offset 2)
 
 ;; Haskell hooks
 
@@ -207,14 +209,14 @@ There are two things you can do about this warning:
 (define-key custom-mapl (kbd "c") 'company-mode)
 (define-key custom-mapl (kbd "b") 'buffer-menu )
 (define-key custom-mapl (kbd "m") 'mc/edit-lines)
-(define-key custom-mapl (kbd "C->") 'mc/mark-next-like-this)
-(define-key custom-mapl (kbd "C-<") 'mc/mark-previous-like-this)
+(define-key custom-mapl (kbd ">") 'mc/mark-next-like-this)
+(define-key custom-mapl (kbd "<") 'mc/mark-previous-like-this)
 (define-key custom-mapl (kbd "l") 'mc/mark-all-like-this)
 (define-key custom-mapl (kbd "s") 'hasky-stack-execute)
-(define-key custom-mapl (kbd "C-SPC") 'company-capf)
+(define-key custom-mapl (kbd "SPC") 'company-capf)
 (define-key custom-mapl (kbd "j") 'haskell-mode-jump-to-def)
-(define-key custom-mapl (kbd "C-a") 'ace-window)
-(define-key custom-mapl (kbd "C-x") 'other-window)
+(define-key custom-mapl (kbd "a") 'ace-window)
+(define-key custom-mapl (kbd "x") 'other-window)
 (define-key custom-mapl (kbd "r") 'browse-kill-ring)
 (define-key custom-mapl (kbd "t")   'treemacs)
 (define-key custom-mapl (kbd "f")   'fzf-directory)
@@ -222,6 +224,8 @@ There are two things you can do about this warning:
 
 
 (global-set-key (kbd "C-z") custom-mapl)
+(global-set-key (kbd "º") custom-mapl)
+
 (global-set-key (kbd "ç") 'insert-lambda)
 
 (defun insert-lambda ()
@@ -240,10 +244,10 @@ There are two things you can do about this warning:
 (define-key view-mode-map (kbd "m") 'mc/edit-lines)
 (define-key view-mode-map (kbd "w") 'save-buffer)
 (define-key view-mode-map (kbd "e") 'er/expand-region)
-(define-key view-mode-map (kbd "<left>") 'shrink-window-horizontally)
-(define-key view-mode-map (kbd "<right>") 'enlarge-window-horizontally)
-(define-key view-mode-map (kbd "<down>") 'shrink-window)
-(define-key view-mode-map (kbd "<up>") 'enlarge-window)
+(define-key view-mode-map (kbd "C-<left>") 'shrink-window-horizontally)
+(define-key view-mode-map (kbd "C-<right>") 'enlarge-window-horizontally)
+(define-key view-mode-map (kbd "C-<down>") 'shrink-window)
+(define-key view-mode-map (kbd "C-<up>") 'enlarge-window)
 
 
 ;; Globals
@@ -258,3 +262,45 @@ There are two things you can do about this warning:
 (push '(direx:direx-mode :position left :width 50 :dedicated t)
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   ["#282828" "#FAB1AB" "#D1FA71" "#FFA600" "#7b68ee" "#dc8cc3" "#96D9F1" "#F7F7F7"])
+ '(custom-safe-themes
+   (quote
+    ("529c211e86eadecb67b6b64ffdf73e71c4337070bd9b3de053f8f7c5da9e07a2" "4c460925984441cad09c74e042fa9d26f4b35320e04d6fb8a265d1a61c9f5c45" "afd761c9b0f52ac19764b99d7a4d871fc329f7392dfc6cd29710e8209c691477" "5903c5f26edd1ef3f9555a2864982b24f2980f096aacb9da0b4b5ccd47962233" default)))
+ '(fci-rule-color "#151515")
+ '(hl-sexp-background-color "#efebe9")
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#B71C1C")
+     (40 . "#FF5722")
+     (60 . "#FFA000")
+     (80 . "#558b2f")
+     (100 . "#00796b")
+     (120 . "#2196f3")
+     (140 . "#4527A0")
+     (160 . "#B71C1C")
+     (180 . "#FF5722")
+     (200 . "#FFA000")
+     (220 . "#558b2f")
+     (240 . "#00796b")
+     (260 . "#2196f3")
+     (280 . "#4527A0")
+     (300 . "#B71C1C")
+     (320 . "#FF5722")
+     (340 . "#FFA000")
+     (360 . "#558b2f"))))
+ '(vc-annotate-very-old-color nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
