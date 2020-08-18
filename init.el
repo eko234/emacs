@@ -117,9 +117,6 @@ There are two things you can do about this warning:
 (setq company-minimum-prefix-length 1)
 ;(set-window-margins () 3 3)
 (setq-default left-margin-width 1 right-margin-width 1)
-
-
-
 (show-paren-mode t)
 ;; remember to add this thing to fix fucked parens in modes like this haskell-indentation-common-electric-command
 
@@ -130,12 +127,12 @@ There are two things you can do about this warning:
 (setq racer-rust-src-path "/home/juicyjouissance/rust-src/rust/src")
 (add-hook 'rust-mode-hook 'company-mode)
 
-;; Python hooks
+;; Python
 (add-hook 'python-mode-hook 'company-mode)
 (setq python-shell-interpreter "python3")
 (setq python-indent-offset 2)
 
-;; Haskell hooks
+;; Haskell
 
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'haskell-mode-hook 'haskell-doc-mode)
@@ -218,8 +215,9 @@ There are two things you can do about this warning:
 (define-key custom-mapl (kbd "a") 'ace-window)
 (define-key custom-mapl (kbd "x") 'other-window)
 (define-key custom-mapl (kbd "r") 'browse-kill-ring)
-(define-key custom-mapl (kbd "t")   'treemacs)
-(define-key custom-mapl (kbd "f")   'fzf-directory)
+(define-key custom-mapl (kbd "t") 'treemacs)
+(define-key custom-mapl (kbd "f") 'fzf-directory)
+(define-key custom-mapl (kbd "d") 'dired)
 
 
 
@@ -234,7 +232,7 @@ There are two things you can do about this warning:
 )
  
 ;; EMACS HAS MODAL EDITING INTEGRATED DUDE
-(global-set-key (kbd "¬") 'view-mode)
+(global-set-key (kbd "<f1>") 'view-mode)
 (define-key view-mode-map (kbd "b") 'buffer-menu)
 (define-key view-mode-map (kbd ">") 'mc/mark-next-like-this )
 (define-key view-mode-map (kbd "<") 'mc/mark-previous-like-this )
@@ -262,45 +260,3 @@ There are two things you can do about this warning:
 (push '(direx:direx-mode :position left :width 50 :dedicated t)
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   ["#282828" "#FAB1AB" "#D1FA71" "#FFA600" "#7b68ee" "#dc8cc3" "#96D9F1" "#F7F7F7"])
- '(custom-safe-themes
-   (quote
-    ("529c211e86eadecb67b6b64ffdf73e71c4337070bd9b3de053f8f7c5da9e07a2" "4c460925984441cad09c74e042fa9d26f4b35320e04d6fb8a265d1a61c9f5c45" "afd761c9b0f52ac19764b99d7a4d871fc329f7392dfc6cd29710e8209c691477" "5903c5f26edd1ef3f9555a2864982b24f2980f096aacb9da0b4b5ccd47962233" default)))
- '(fci-rule-color "#151515")
- '(hl-sexp-background-color "#efebe9")
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#B71C1C")
-     (40 . "#FF5722")
-     (60 . "#FFA000")
-     (80 . "#558b2f")
-     (100 . "#00796b")
-     (120 . "#2196f3")
-     (140 . "#4527A0")
-     (160 . "#B71C1C")
-     (180 . "#FF5722")
-     (200 . "#FFA000")
-     (220 . "#558b2f")
-     (240 . "#00796b")
-     (260 . "#2196f3")
-     (280 . "#4527A0")
-     (300 . "#B71C1C")
-     (320 . "#FF5722")
-     (340 . "#FFA000")
-     (360 . "#558b2f"))))
- '(vc-annotate-very-old-color nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
