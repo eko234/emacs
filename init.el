@@ -120,6 +120,8 @@ There are two things you can do about this warning:
 (show-paren-mode t)
 ;; remember to add this thing to fix fucked parens in modes like this haskell-indentation-common-electric-command
 
+
+
 ;; HOOKS
 
 ;; Rust
@@ -201,9 +203,15 @@ There are two things you can do about this warning:
 ;;(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 
+
+
 ;; MY CUSTOM BINDS
 (define-prefix-command 'custom-mapl)
 (define-key custom-mapl (kbd "c") 'company-mode)
+(define-key custom-mapl (kbd "k") 'kill-buffer)
+(define-key custom-mapl (kbd "z") 'undo)
+(define-key custom-mapl (kbd "g") 'keyboard-quit)
+(define-key custom-mapl (kbd "w") 'save-buffer)
 (define-key custom-mapl (kbd "b") 'buffer-menu )
 (define-key custom-mapl (kbd "e") 'mc/edit-lines)
 (define-key custom-mapl (kbd ">") 'mc/mark-next-like-this)
@@ -263,53 +271,4 @@ There are two things you can do about this warning:
 (push '(direx:direx-mode :position left :width 50 :dedicated t)
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   ["#5f5f5f" "#ff4b4b" "#a1db00" "#fce94f" "#5fafd7" "#d18aff" "#afd7ff" "#ffffff"])
- '(custom-safe-themes
-   (quote
-    ("a6fc75241bcc7ce6f68dcfd0de2d4c4bd804d0f8cd3a9f08c3a07654160e9abe" "e61752b5a3af12be08e99d076aedadd76052137560b7e684a8be2f8d2958edc3" "7675ffd2f5cb01a7aab53bcdd702fa019b56c764900f2eea0f74ccfc8e854386" "ae65ccecdcc9eb29ec29172e1bfb6cadbe68108e1c0334f3ae52414097c501d2" "ca2e59377dc1ecee2a1069ec7126b453fa1198fed946304abb9a5b8c7ad5404d" "25f81851315ee76bd43cb551767861d24d2450d07e8e3ca412d09adbe28f5f98" "d4f8fcc20d4b44bf5796196dbeabec42078c2ddb16dcb6ec145a1c610e0842f3" "afd761c9b0f52ac19764b99d7a4d871fc329f7392dfc6cd29710e8209c691477" "5903c5f26edd1ef3f9555a2864982b24f2980f096aacb9da0b4b5ccd47962233" "16ab866312f1bd47d1304b303145f339eac46bbc8d655c9bfa423b957aa23cc9" "d9766ec8d1dca35ad9392d212da441517800028b585d187f08ea44ce1c84ebdf" "5d75f9080a171ccf5508ce033e31dbf5cc8aa19292a7e0ce8071f024c6bcad2a" "bd82c92996136fdacbb4ae672785506b8d1d1d511df90a502674a51808ecc89f" default)))
- '(fci-rule-color "#3a3a3a")
- '(hl-sexp-background-color "#121212")
- '(notmuch-search-line-faces
-   (quote
-    (("unread" :foreground "#aeee00")
-     ("flagged" :foreground "#0a9dff")
-     ("deleted" :foreground "#ff2c4b" :bold t))))
- '(package-selected-packages
-   (quote
-    (white-sand-theme which-key treemacs subatomic256-theme subatomic-theme srcery-theme sourcerer-theme smyx-theme smex slime simple-modeline seti-theme reykjavik-theme purple-haze-theme popwin popup pkg-info peacock-theme paper-theme northcode-theme nofrils-acme-theme noctilux-theme multiple-cursors move-text moe-theme minsk-theme metalheart-theme material-theme magit jazz-theme helm-core hasky-stack haskell-mode fzf expand-region elm-mode dsvn direx company browse-kill-ring badwolf-theme avk-emacs-themes)))
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#f36c60")
-     (40 . "#ff9800")
-     (60 . "#fff59d")
-     (80 . "#8bc34a")
-     (100 . "#81d4fa")
-     (120 . "#4dd0e1")
-     (140 . "#b39ddb")
-     (160 . "#f36c60")
-     (180 . "#ff9800")
-     (200 . "#fff59d")
-     (220 . "#8bc34a")
-     (240 . "#81d4fa")
-     (260 . "#4dd0e1")
-     (280 . "#b39ddb")
-     (300 . "#f36c60")
-     (320 . "#ff9800")
-     (340 . "#fff59d")
-     (360 . "#8bc34a"))))
- '(vc-annotate-very-old-color nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
