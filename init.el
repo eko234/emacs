@@ -22,6 +22,7 @@
 	 hasky-stack
 	 browse-kill-ring
 	 treemacs
+	 sly
 	 ))
 
 
@@ -96,14 +97,16 @@ There are two things you can do about this warning:
 (setq company-tooltip-align-annotations t)
 (move-text-default-bindings)
 (ido-mode t)
-;;(projectile-mode +1)
+
 (simple-modeline-mode)
 (put 'upcase-region 'disabled nil)
 (setq visible-bell 1)
-;;(setq split-width-threshold nil) ;;for vertical split.
-(setq split-width-threshold 1 ) ;;for horizontal split.
+(setq split-width-threshold nil) ;;for vertical split.
+;;(setq split-width-threshold 1 ) ;;for horizontal split.
+
 ;;(setq inhibit-splash-screen t)
 ;;(setq inhibit-startup-message t)
+
 (add-to-list 'default-frame-alist
 	     '(vertical-scroll-bars . nil))
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -192,12 +195,18 @@ There are two things you can do about this warning:
 
 
 ;; Elixir
-(add-hook 'elixir-mode-hook 'alchemist-mode)
-(add-hook 'alchemist-mode-hook 'company-mode)
+;;(add-hook 'elixir-mode-hook 'alchemist-mode)
+;;(add-hook 'alchemist-mode-hook 'company-mode)
 
 ;; ELisp
-(add-hook 'emacs-lisp-mode-hook 'company-mode)
+(add-hook 'emacs-lisp-mode-hook 'company-mode 'sly)
+(setq inferior-lisp-program "sbcl")
 
+;; Lisp
+
+
+;; GUILE
+(setq scheme-program-name "guile")
 ;; Projectile
 ;;(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 ;;(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -266,4 +275,5 @@ There are two things you can do about this warning:
 (push '(direx:direx-mode :position left :width 50 :dedicated t)
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
+
 
