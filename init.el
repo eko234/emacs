@@ -13,6 +13,8 @@
 	 which-key
 	 move-text
 	 expand-region
+	 multiple-cursors
+	 company
 	 direx
 	 smex
 	 popwin
@@ -82,6 +84,9 @@ There are two things you can do about this warning:
 (require 'cl)
 (require 'dsvn)
 (require 'view)
+(require 'org)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
 
 ;; interface
 (menu-bar-mode -1)
@@ -127,6 +132,16 @@ There are two things you can do about this warning:
 
 ;; HOOKS
 
+
+;; Org
+
+(defun org-summary-todo (n-done n-not-done)
+  "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  (let (org-log-done org-log-states)   ; turn off logging
+    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+
+(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+
 ;; Rust
 
 (setq racer-rust-src-path "/home/juicyjouissance/rust-src/rust/src")
@@ -137,12 +152,17 @@ There are two things you can do about this warning:
 (setq python-shell-interpreter "python3")
 (setq python-indent-offset 2)
 
+
+;; Elm
+
+(add-hook 'elm-mode-hook 'company-mode)
+
 ;; Haskell
 
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'haskell-mode-hook 'haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'company-mode)
-(add-hook 'haskell-interactive-mode-hook 'company-mode)
+;;(add-hook 'haskell-interactive-mode-hook 'company-mode)
 
 (setq haskell-doc-prettify-types t)
 (setq haskell-doc-show-global-types t)
@@ -199,14 +219,27 @@ There are two things you can do about this warning:
 ;;(add-hook 'alchemist-mode-hook 'company-mode)
 
 ;; ELisp
+;; Lisp
 (add-hook 'emacs-lisp-mode-hook 'company-mode 'sly)
 (setq inferior-lisp-program "sbcl")
 
-;; Lisp
 
 
-;; GUILE
+;; Scheme
 (setq scheme-program-name "guile")
+;; This hook lets you use your theme colours instead of quack's ones.
+;; use run-scheme to bring repl,
+
+(defun scheme-mode-quack-hook ()
+  (require 'quack)
+  (setq quack-fontify-style 'emacs)
+  (setq quack-default-program "guile"))
+
+
+(add-hook 'scheme-mode-hook 'scheme-mode-quack-hook)
+
+
+
 ;; Projectile
 ;;(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 ;;(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -252,7 +285,7 @@ There are two things you can do about this warning:
   (insert "\\")
 )
  
-;; EMACS HAS MODAL EDITING INTEGRATED DUDE
+;; EMACS HAS MODAL EDITING INTEGRATED DUDE ... SORTA
 (global-set-key (kbd "<f1>") 'view-mode)
 (define-key view-mode-map (kbd "a") 'ace-window)
 (define-key view-mode-map (kbd "x") 'other-window)
@@ -275,5 +308,4 @@ There are two things you can do about this warning:
 (push '(direx:direx-mode :position left :width 50 :dedicated t)
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
-
 
