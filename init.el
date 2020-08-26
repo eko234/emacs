@@ -25,6 +25,9 @@
 	 browse-kill-ring
 	 treemacs
 	 sly
+	 ace-window
+	 smyx-theme
+	 ido
 	 ))
 
 
