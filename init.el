@@ -130,14 +130,14 @@ There are two things you can do about this warning:
 ;;(setq inhibit-splash-screen t)
 ;;(setq inhibit-startup-message t)
 
-
+(add-to-list 'default-frame-alist
+	     '(vertical-scroll-bars . nil))
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 (setq display-line-numbers-current-absolute t)
 ;;(global-display-line-numbers-mode)
-
 (setq company-show-numbers t)
 (setq company-idle-delay 0)
 (setq company-minimum-prefix-length 1)
