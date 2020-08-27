@@ -28,6 +28,8 @@
 	 ace-window
 	 smyx-theme
 	 ido
+	 fzf
+       
 	 ))
 
 
@@ -253,6 +255,7 @@ There are two things you can do about this warning:
 ;; MY CUSTOM BINDS
 (define-prefix-command 'custom-mapl)
 (define-key custom-mapl (kbd "c") 'company-mode)
+(define-key custom-mapl (kbd "o") 'comment-region)
 (define-key custom-mapl (kbd "k") 'kill-buffer)
 (define-key custom-mapl (kbd "z") 'undo)
 (define-key custom-mapl (kbd "g") 'keyboard-quit)
@@ -273,12 +276,15 @@ There are two things you can do about this warning:
 (define-key custom-mapl (kbd "f") 'fzf-directory)
 (define-key custom-mapl (kbd "d") 'dired)
 (define-key custom-mapl (kbd "m") 'magit)
-(define-key custom-mapl (kbd "q q") 'kill-emacs)
-
-
+(define-key custom-mapl (kbd "q q q") 'kill-emacs)
+(define-key custom-mapl (kbd "q r c") 'copy-rectangle-as-kill)
+(define-key custom-mapl (kbd "q r y") 'yank-rectangle)
+(define-key custom-mapl (kbd "u") 'delete-other-windows)
 
 
 (global-set-key (kbd "C-z") custom-mapl)
+
+
 (global-set-key (kbd "º") custom-mapl)
 
 (global-set-key (kbd "ç") 'insert-lambda)
@@ -290,6 +296,7 @@ There are two things you can do about this warning:
  
 ;; EMACS HAS MODAL EDITING INTEGRATED DUDE ... SORTA
 (global-set-key (kbd "<f1>") 'view-mode)
+(define-key view-mode-map (kbd "h") 'next-line )
 (define-key view-mode-map (kbd "a") 'ace-window)
 (define-key view-mode-map (kbd "x") 'other-window)
 (define-key view-mode-map (kbd "w") 'save-buffer)
