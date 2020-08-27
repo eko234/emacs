@@ -1,3 +1,4 @@
+
 (require 'package)
 (add-to-list 'package-archives
 ;;             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
@@ -29,7 +30,7 @@
 	 smyx-theme
 	 ido
 	 fzf
-       
+	 hydra
 	 ))
 
 
@@ -107,7 +108,6 @@ There are two things you can do about this warning:
 (setq company-tooltip-align-annotations t)
 (move-text-default-bindings)
 (ido-mode t)
-
 (simple-modeline-mode)
 (put 'upcase-region 'disabled nil)
 (setq visible-bell 1)
@@ -225,7 +225,7 @@ There are two things you can do about this warning:
 
 ;; ELisp
 ;; Lisp
-(add-hook 'emacs-lisp-mode-hook 'company-mode 'sly)
+(add-hook 'emacs-lisp-mode-hook 'company-mode 'sly 'rainbow-delimiters)
 (setq inferior-lisp-program "sbcl")
 
 
@@ -241,7 +241,7 @@ There are two things you can do about this warning:
   (setq quack-default-program "guile"))
 
 
-(add-hook 'scheme-mode-hook 'scheme-mode-quack-hook)
+(add-hook 'scheme-mode-hook 'scheme-mode-quack-hook 'rainbow-delimiters)
 
 
 
@@ -261,11 +261,13 @@ There are two things you can do about this warning:
 (define-key custom-mapl (kbd "g") 'keyboard-quit)
 (define-key custom-mapl (kbd "w") 'save-buffer)
 (define-key custom-mapl (kbd "b") 'buffer-menu )
+
 (define-key custom-mapl (kbd "e") 'mc/edit-lines)
 (define-key custom-mapl (kbd "1") 'mc/mark-previous-like-this)
 (define-key custom-mapl (kbd "2") 'mc/mark-next-like-this)
 (define-key custom-mapl (kbd "3") 'er/expand-region)
 (define-key custom-mapl (kbd "l") 'mc/mark-all-like-this)
+
 (define-key custom-mapl (kbd "s") 'hasky-stack-execute)
 (define-key custom-mapl (kbd "SPC") 'company-capf)
 (define-key custom-mapl (kbd "j") 'haskell-mode-jump-to-def)
@@ -293,17 +295,36 @@ There are two things you can do about this warning:
   (interactive)
   (insert "\\")
 )
- 
+
+;; Hydras
+
+(defhydra nav (global-map "<f1>")
+  "nav"
+  ("j" previous-line "nl")
+  ("k" next-line  "pl")
+  ("h" backward-char "bc")
+  ("l" forward-char "fc")
+  ("n" backward-word "bw")
+  ("." forward-word "fw")
+  ("m" backward-sentence "bs")
+  ("," forward-sentence "fs")
+  ("SPC" set-mark-command "ma")
+  ("g" keyboard-quit "kq")
+  ("q" nil "eh")
+  )
+
+
+
 ;; EMACS HAS MODAL EDITING INTEGRATED DUDE ... SORTA
-(global-set-key (kbd "<f1>") 'view-mode)
-(define-key view-mode-map (kbd "h") 'next-line )
-(define-key view-mode-map (kbd "a") 'ace-window)
-(define-key view-mode-map (kbd "x") 'other-window)
-(define-key view-mode-map (kbd "w") 'save-buffer)
-(define-key view-mode-map (kbd "C-<left>") 'shrink-window-horizontally)
-(define-key view-mode-map (kbd "C-<right>") 'enlarge-window-horizontally)
-(define-key view-mode-map (kbd "C-<down>") 'shrink-window)
-(define-key view-mode-map (kbd "C-<up>") 'enlarge-window)
+;; (global-set-key (kbd "<f1>") 'view-mode)
+;; (define-key view-mode-map (kbd "h") 'next-line )
+;; (define-key view-mode-map (kbd "a") 'ace-window)
+;; (define-key view-mode-map (kbd "x") 'other-window)
+;; (define-key view-mode-map (kbd "w") 'save-buffer)
+;; (define-key view-mode-map (kbd "C-<left>") 'shrink-window-horizontally)
+;; (define-key view-mode-map (kbd "C-<right>") 'enlarge-window-horizontally)
+;; (define-key view-mode-map (kbd "C-<down>") 'shrink-window)
+;; (define-key view-mode-map (kbd "C-<up>") 'enlarge-window)
 
 
 ;; Globals
@@ -319,3 +340,17 @@ There are two things you can do about this warning:
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (rainbow-delimiters white-sand-theme which-key treemacs subatomic256-theme subatomic-theme srcery-theme sourcerer-theme smyx-theme smex sly simple-modeline seti-theme reykjavik-theme quack purple-haze-theme pos-tip popwin popup pkg-info peacock-theme paper-theme northcode-theme nofrils-acme-theme noctilux-theme multiple-cursors move-text moe-theme minsk-theme metalheart-theme material-theme magit jazz-theme helm-core hasky-stack haskell-mode fzf expand-region elm-mode dsvn direx company-tabnine browse-kill-ring badwolf-theme avk-emacs-themes))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
