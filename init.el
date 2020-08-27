@@ -1,12 +1,10 @@
 ;; some useful stuff
-
 ;; META
 ;; t transpose
 ;; h mark paragraph
 ;; % query replace
 ;; s-o list of regex matching lines
 ;; x h select all\
-
 ;; C-u C-s regex search
 
 
@@ -44,7 +42,11 @@
 	 hydra
 	 rainbow-delimiters
 	 swiper
+	 use-package
+	 dashboard
+	 projectile
 	 ))
+
 
 
 ;; as a result of the tortuous process to realize that emacs is the best environment for haskell
@@ -96,18 +98,35 @@ There are two things you can do about this warning:
 (require 'ido)
 (require 'direx)
 (require 'popwin)
-(require 'vc-svn)
+;;(require 'vc-svn)
 (require 'ace-window)
 (require 'expand-region)
 (require 'color)
 (require 'cl)
 (require 'dsvn)
 (require 'view)
-(require 'org)
+;;(require 'org)
+;;(require 'dashboard)
+(require 'projectile)
+;;(require 'org)
+;;(require 'use-package)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 
 ;; interface
+
+(setq dashboard-items '((recents . 5)
+			(projects . 5)
+			(agenda . 10)
+ 			))
+(custom-set-variables
+ '(org-agenda-files (quote ("~/org/tasks.org" "~/org/casita.org"))))
+
+
+(dashboard-setup-startup-hook)
+
+
+
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
@@ -372,17 +391,3 @@ There are two things you can do about this warning:
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (flx-isearch swiper white-sand-theme which-key treemacs subatomic256-theme subatomic-theme srcery-theme sourcerer-theme smyx-theme smex sly simple-modeline seti-theme reykjavik-theme rainbow-delimiters quack purple-haze-theme pos-tip popwin popup pkg-info peacock-theme paper-theme northcode-theme nofrils-acme-theme noctilux-theme multiple-cursors move-text moe-theme minsk-theme metalheart-theme material-theme magit jazz-theme helm-core hasky-stack haskell-mode fzf expand-region elm-mode dsvn direx company-tabnine browse-kill-ring badwolf-theme avk-emacs-themes))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
