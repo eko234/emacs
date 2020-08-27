@@ -1,3 +1,14 @@
+;; some useful stuff
+
+;; META
+;; t transpose
+;; h mark paragraph
+;; % query replace
+;; s-o list of regex matching lines
+;; x h select all\
+
+;; C-u C-s regex search
+
 
 (require 'package)
 (add-to-list 'package-archives
@@ -31,6 +42,7 @@
 	 ido
 	 fzf
 	 hydra
+	 rainbow-delimiters
 	 ))
 
 
@@ -225,7 +237,10 @@ There are two things you can do about this warning:
 
 ;; ELisp
 ;; Lisp
-(add-hook 'emacs-lisp-mode-hook 'company-mode 'sly 'rainbow-delimiters)
+(add-hook 'emacs-lisp-mode-hook 'company-mode)
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+	 
+
 (setq inferior-lisp-program "sbcl")
 
 
@@ -269,7 +284,7 @@ There are two things you can do about this warning:
 (define-key custom-mapl (kbd "l") 'mc/mark-all-like-this)
 
 (define-key custom-mapl (kbd "s") 'hasky-stack-execute)
-(define-key custom-mapl (kbd "SPC") 'company-capf)
+;;(define-key custom-mapl (kbd "SPC") 'company-capf)
 (define-key custom-mapl (kbd "j") 'haskell-mode-jump-to-def)
 (define-key custom-mapl (kbd "a") 'ace-window)
 (define-key custom-mapl (kbd "x") 'other-window)
@@ -296,9 +311,19 @@ There are two things you can do about this warning:
   (insert "\\")
 )
 
+;; Inset moves
+;; (global-set-key (kbd "C-j") 'previous-line )
+;; (global-set-key (kbd "C-k") 'next-line )
+;; (global-set-key (kbd "C-h") 'backward-char)
+;; (global-set-key (kbd "C-l") 'forward-char)
+;; (global-set-key (kbd "C-n") 'backward-word)
+;; (global-set-key (kbd "C-.") 'forward-word)
+;; (global-set-key (kbd "C-m") 'backward-sentence)
+;; (global-set-key (kbd "C-,") 'forward-sentence)
+
 ;; Hydras
 
-(defhydra nav (global-map "<f1>")
+(defhydra nav (global-map "ESC SPC")
   "nav"
   ("j" previous-line "nl")
   ("k" next-line  "pl")
@@ -310,8 +335,12 @@ There are two things you can do about this warning:
   ("," forward-sentence "fs")
   ("SPC" set-mark-command "ma")
   ("g" keyboard-quit "kq")
-  ("q" nil "eh")
+  ("i" nil "eh")
   )
+
+
+
+
 
 
 
@@ -340,17 +369,3 @@ There are two things you can do about this warning:
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (rainbow-delimiters white-sand-theme which-key treemacs subatomic256-theme subatomic-theme srcery-theme sourcerer-theme smyx-theme smex sly simple-modeline seti-theme reykjavik-theme quack purple-haze-theme pos-tip popwin popup pkg-info peacock-theme paper-theme northcode-theme nofrils-acme-theme noctilux-theme multiple-cursors move-text moe-theme minsk-theme metalheart-theme material-theme magit jazz-theme helm-core hasky-stack haskell-mode fzf expand-region elm-mode dsvn direx company-tabnine browse-kill-ring badwolf-theme avk-emacs-themes))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
