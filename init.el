@@ -43,6 +43,7 @@
 	 fzf
 	 hydra
 	 rainbow-delimiters
+	 swiper
 	 ))
 
 
@@ -129,14 +130,14 @@ There are two things you can do about this warning:
 ;;(setq inhibit-splash-screen t)
 ;;(setq inhibit-startup-message t)
 
-(add-to-list 'default-frame-alist
-	     '(vertical-scroll-bars . nil))
+
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 (setq display-line-numbers-current-absolute t)
 ;;(global-display-line-numbers-mode)
+
 (setq company-show-numbers t)
 (setq company-idle-delay 0)
 (setq company-minimum-prefix-length 1)
@@ -284,6 +285,8 @@ There are two things you can do about this warning:
 (define-key custom-mapl (kbd "l") 'mc/mark-all-like-this)
 
 (define-key custom-mapl (kbd "s") 'hasky-stack-execute)
+(define-key custom-mapl (kbd "S") 'flx-isearch-forward)
+
 ;;(define-key custom-mapl (kbd "SPC") 'company-capf)
 (define-key custom-mapl (kbd "j") 'haskell-mode-jump-to-def)
 (define-key custom-mapl (kbd "a") 'ace-window)
@@ -369,3 +372,17 @@ There are two things you can do about this warning:
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (flx-isearch swiper white-sand-theme which-key treemacs subatomic256-theme subatomic-theme srcery-theme sourcerer-theme smyx-theme smex sly simple-modeline seti-theme reykjavik-theme rainbow-delimiters quack purple-haze-theme pos-tip popwin popup pkg-info peacock-theme paper-theme northcode-theme nofrils-acme-theme noctilux-theme multiple-cursors move-text moe-theme minsk-theme metalheart-theme material-theme magit jazz-theme helm-core hasky-stack haskell-mode fzf expand-region elm-mode dsvn direx company-tabnine browse-kill-ring badwolf-theme avk-emacs-themes))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
