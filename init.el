@@ -1,4 +1,5 @@
 ;; some useful stuff
+;; Meslo LGL
 ;; META
 ;; t transpose
 ;; h mark paragraph
@@ -6,15 +7,18 @@
 ;; s-o list of regex matching lines
 ;; x h select all\
 ;; C-u C-s regex search
-
+;; F3 record macr F4 save macro / aply macro
+;; you can cycle the macro ring
 
 (require 'package)
 (add-to-list 'package-archives
-;;             '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
-	     '("melpa" . "http://melpa.org/packages/")
-	     )
+;;            '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
+ 	     '("melpa" . "http://melpa.org/packages/")
+ 	     )
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
+
+
 
 ; List the packages you want
 (setq package-list
@@ -45,7 +49,11 @@
 	 use-package
 	 dashboard
 	 projectile
+	 undo-tree
 	 ))
+
+
+
 
 
 
@@ -98,7 +106,7 @@ There are two things you can do about this warning:
 (require 'haskell-mode)
 ;;(require 'ido)
 ;;(require 'direx)
-;;(require 'popwin)
+(require 'popwin)
 ;;(require 'vc-svn)
 ;;(require 'ace-window)
 ;;(require 'expand-region)
@@ -115,7 +123,8 @@ There are two things you can do about this warning:
 
 
 ;; interface
-
+(global-undo-tree-mode)
+(defalias 'yes-or-no-p 'y-or-n-p)
 (setq dashboard-items '((recents . 5)
 			(projects . 5)
 			(agenda . 10)
@@ -146,32 +155,20 @@ There are two things you can do about this warning:
 (setq split-width-threshold nil) ;;for vertical split.
 ;;(setq split-width-threshold 1 ) ;;for horizontal split.
 
-;;(setq inhibit-splash-screen t)
-;;(setq inhibit-startup-message t)
 
 (add-to-list 'default-frame-alist
 	     '(vertical-scroll-bars . nil))
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 (setq display-line-numbers-current-absolute t)
-;;(global-display-line-numbers-mode)
 (setq company-show-numbers t)
 (setq company-idle-delay 0)
 (setq company-minimum-prefix-length 1)
-;(set-window-margins () 3 3)
 (setq-default left-margin-width 1 right-margin-width 1)
 (show-paren-mode t)
 ;; remember to add this thing to fix fucked parens in modes like this haskell-indentation-common-electric-command
 
 
-
-;; HOOKS
-
-
 ;; Org
-
 (defun org-summary-todo (n-done n-not-done)
   "Switch entry to DONE when all subentries are done, to TODO otherwise."
   (let (org-log-done org-log-states)   ; turn off logging
@@ -180,7 +177,6 @@ There are two things you can do about this warning:
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
 ;; Rust
-
 (setq racer-rust-src-path "/home/juicyjouissance/rust-src/rust/src")
 (add-hook 'rust-mode-hook 'company-mode)
 
@@ -191,11 +187,9 @@ There are two things you can do about this warning:
 
 
 ;; Elm
-
 (add-hook 'elm-mode-hook 'company-mode)
 
 ;; Haskell
-
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'haskell-mode-hook 'haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'company-mode)
@@ -249,8 +243,6 @@ There are two things you can do about this warning:
   )
 
 
-
-
 ;; Elixir
 ;;(add-hook 'elixir-mode-hook 'alchemist-mode)
 ;;(add-hook 'alchemist-mode-hook 'company-mode)
@@ -262,8 +254,6 @@ There are two things you can do about this warning:
 	 
 
 (setq inferior-lisp-program "sbcl")
-
-
 
 ;; Scheme
 (setq scheme-program-name "guile")
@@ -279,7 +269,6 @@ There are two things you can do about this warning:
 (add-hook 'scheme-mode-hook 'scheme-mode-quack-hook 'rainbow-delimiters)
 
 
-
 ;; Projectile
 ;;(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 ;;(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -292,23 +281,20 @@ There are two things you can do about this warning:
 (define-key custom-mapl (kbd "c") 'company-mode)
 (define-key custom-mapl (kbd "o") 'comment-region)
 (define-key custom-mapl (kbd "O") 'uncomment-region)
-
-
 (define-key custom-mapl (kbd "k") 'kill-buffer)
-(define-key custom-mapl (kbd "z") 'undo)
+(define-key custom-mapl (kbd "<") 'undo-tree-undo)
+(define-key custom-mapl (kbd "z") 'undo-tree-redo)
+(define-key custom-mapl (kbd "Z") 'undo-tree-visualize)
 (define-key custom-mapl (kbd "g") 'keyboard-quit)
 (define-key custom-mapl (kbd "w") 'save-buffer)
 (define-key custom-mapl (kbd "b") 'buffer-menu )
-
 (define-key custom-mapl (kbd "e") 'mc/edit-lines)
 (define-key custom-mapl (kbd "1") 'mc/mark-previous-like-this)
 (define-key custom-mapl (kbd "2") 'mc/mark-next-like-this)
 (define-key custom-mapl (kbd "3") 'er/expand-region)
 (define-key custom-mapl (kbd "l") 'mc/mark-all-like-this)
-
 (define-key custom-mapl (kbd "s") 'hasky-stack-execute)
 (define-key custom-mapl (kbd "S") 'flx-isearch-forward)
-
 ;;(define-key custom-mapl (kbd "SPC") 'company-capf)
 (define-key custom-mapl (kbd "j") 'haskell-mode-jump-to-def)
 (define-key custom-mapl (kbd "a") 'ace-window)
@@ -336,15 +322,17 @@ There are two things you can do about this warning:
   (insert "\\")
 )
 
-;; Inset moves
-;; (global-set-key (kbd "C-j") 'previous-line )
-;; (global-set-key (kbd "C-k") 'next-line )
-;; (global-set-key (kbd "C-h") 'backward-char)
-;; (global-set-key (kbd "C-l") 'forward-char)
-;; (global-set-key (kbd "C-n") 'backward-word)
-;; (global-set-key (kbd "C-.") 'forward-word)
-;; (global-set-key (kbd "C-m") 'backward-sentence)
-;; (global-set-key (kbd "C-,") 'forward-sentence)
+
+
+;; moves
+(global-set-key (kbd "<f7>") 'previous-line )
+(global-set-key (kbd "<f6>") 'next-line )
+(global-set-key (kbd "<f5>") 'backward-char)
+(global-set-key (kbd "<f8>") 'forward-char)
+(global-set-key (kbd "C-<f7>") 'backward-sentence )
+(global-set-key (kbd "C-<f6>") 'forward-sentence )
+(global-set-key (kbd "C-<f5>") 'backward-word)
+(global-set-key (kbd "C-<f8>") 'forward-word)
 
 ;; Hydras
 
@@ -380,3 +368,17 @@ There are two things you can do about this warning:
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (which-key use-package treemacs swiper smyx-theme smex sly simple-modeline rainbow-delimiters quack projectile pos-tip popwin popup noctilux-theme multiple-cursors move-text magit hasky-stack haskell-mode fzf flx-isearch expand-region elm-mode dsvn direx dashboard company-tabnine browse-kill-ring))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
