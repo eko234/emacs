@@ -93,23 +93,24 @@ There are two things you can do about this warning:
 
 
 ;; Global requires
-(require 'multiple-cursors)
-(require 'elm-mode)
-(require 'ido)
-(require 'direx)
-(require 'popwin)
+;;(require 'multiple-cursors)
+;;(require 'elm-mode)
+(require 'haskell-mode)
+;;(require 'ido)
+;;(require 'direx)
+;;(require 'popwin)
 ;;(require 'vc-svn)
-(require 'ace-window)
-(require 'expand-region)
-(require 'color)
-(require 'cl)
-(require 'dsvn)
-(require 'view)
+;;(require 'ace-window)
+;;(require 'expand-region)
+;;(require 'color)
+;;(require 'cl)
+;;(require 'dsvn)
+;;(require 'view)
 ;;(require 'org)
 ;;(require 'dashboard)
-(require 'projectile)
-;;(require 'org)
+;;(require 'projectile)
 ;;(require 'use-package)
+
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 
@@ -119,9 +120,8 @@ There are two things you can do about this warning:
 			(projects . 5)
 			(agenda . 10)
  			))
-(custom-set-variables
- '(org-agenda-files (quote ("~/org/tasks.org" "~/org/casita.org"))))
 
+(setq org-agenda-files '("~/org/tasks.org" "~/org/casita.org"))
 
 (dashboard-setup-startup-hook)
 
@@ -291,6 +291,9 @@ There are two things you can do about this warning:
 (define-prefix-command 'custom-mapl)
 (define-key custom-mapl (kbd "c") 'company-mode)
 (define-key custom-mapl (kbd "o") 'comment-region)
+(define-key custom-mapl (kbd "O") 'uncomment-region)
+
+
 (define-key custom-mapl (kbd "k") 'kill-buffer)
 (define-key custom-mapl (kbd "z") 'undo)
 (define-key custom-mapl (kbd "g") 'keyboard-quit)
@@ -357,26 +360,12 @@ There are two things you can do about this warning:
   ("," forward-sentence "fs")
   ("SPC" set-mark-command "ma")
   ("g" keyboard-quit "kq")
+  ("C-<left>" shrink-window-horizontally "swh")
+  ("C-<right>" enlarge-window-horizontally "ewh")
+  ("C-<down>" shrink-window "swv")
+  ("C-<up>" enlarge-window "ewv")
   ("i" nil "eh")
   )
-
-
-
-
-
-
-
-;; EMACS HAS MODAL EDITING INTEGRATED DUDE ... SORTA
-;; (global-set-key (kbd "<f1>") 'view-mode)
-;; (define-key view-mode-map (kbd "h") 'next-line )
-;; (define-key view-mode-map (kbd "a") 'ace-window)
-;; (define-key view-mode-map (kbd "x") 'other-window)
-;; (define-key view-mode-map (kbd "w") 'save-buffer)
-;; (define-key view-mode-map (kbd "C-<left>") 'shrink-window-horizontally)
-;; (define-key view-mode-map (kbd "C-<right>") 'enlarge-window-horizontally)
-;; (define-key view-mode-map (kbd "C-<down>") 'shrink-window)
-;; (define-key view-mode-map (kbd "C-<up>") 'enlarge-window)
-
 
 ;; Globals
 (global-set-key (kbd "M-x") 'smex)
