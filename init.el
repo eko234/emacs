@@ -325,14 +325,16 @@ There are two things you can do about this warning:
 
 
 ;; moves
-(global-set-key (kbd "<f7>") 'previous-line )
-(global-set-key (kbd "<f6>") 'next-line )
-(global-set-key (kbd "<f5>") 'backward-char)
-(global-set-key (kbd "<f8>") 'forward-char)
-(global-set-key (kbd "C-<f7>") 'backward-sentence )
-(global-set-key (kbd "C-<f6>") 'forward-sentence )
-(global-set-key (kbd "C-<f5>") 'backward-word)
-(global-set-key (kbd "C-<f8>") 'forward-word)
+(global-set-key (kbd "<f11>") 'previous-line )
+(global-set-key (kbd "<f10>") 'next-line )
+(global-set-key (kbd "<f9>") 'backward-char)
+(global-set-key (kbd "<f12>") 'forward-char)
+(global-set-key (kbd "C-<f11>") 'backward-sentence )
+(global-set-key (kbd "C-<f10>") 'forward-sentence )
+(global-set-key (kbd "C-<f9>") 'backward-word)
+(global-set-key (kbd "C-<f12>") 'forward-word)
+
+(global-set-key (kbd "<f8>") 'menu-bar-open)
 
 ;; Hydras
 
