@@ -19,7 +19,6 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
 
-
 ; List the packages you want
 (setq package-list
       '( elm-mode
@@ -53,6 +52,7 @@
 	 anzu
 	 beacon
 	 origami
+	 evil
 	 ))
 
 
@@ -122,12 +122,14 @@ There are two things you can do about this warning:
 ;;(require 'projectile)
 ;;(require 'use-package)
 (require 'origami)
+(require 'evil)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 
 
 ;; interface
+(evil-mode 1)
 
 (global-origami-mode)
 (beacon-mode 1)
@@ -320,7 +322,7 @@ There are two things you can do about this warning:
 
 
 (global-set-key (kbd "C-z") custom-mapl)
-
+(global-set-key (kbd "C-SPC") 'evil-normal-state)
 
 (global-set-key (kbd "º") custom-mapl)
 
@@ -379,17 +381,3 @@ There are two things you can do about this warning:
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (origami which-key use-package treemacs swiper smyx-theme smex sly simple-modeline rainbow-delimiters quack projectile pos-tip popwin popup noctilux-theme multiple-cursors move-text magit hasky-stack haskell-mode fzf flx-isearch expand-region elm-mode dsvn direx dashboard company-tabnine browse-kill-ring))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
