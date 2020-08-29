@@ -50,6 +50,9 @@
 	 dashboard
 	 projectile
 	 undo-tree
+	 anzu
+	 beacon
+	 origami
 	 ))
 
 
@@ -118,11 +121,17 @@ There are two things you can do about this warning:
 ;;(require 'dashboard)
 ;;(require 'projectile)
 ;;(require 'use-package)
+(require 'origami)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 
+
 ;; interface
+
+(global-origami-mode)
+(beacon-mode 1)
+(global-anzu-mode +1)
 (global-undo-tree-mode)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq dashboard-items '((recents . 5)
@@ -377,7 +386,7 @@ There are two things you can do about this warning:
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (which-key use-package treemacs swiper smyx-theme smex sly simple-modeline rainbow-delimiters quack projectile pos-tip popwin popup noctilux-theme multiple-cursors move-text magit hasky-stack haskell-mode fzf flx-isearch expand-region elm-mode dsvn direx dashboard company-tabnine browse-kill-ring))))
+    (origami which-key use-package treemacs swiper smyx-theme smex sly simple-modeline rainbow-delimiters quack projectile pos-tip popwin popup noctilux-theme multiple-cursors move-text magit hasky-stack haskell-mode fzf flx-isearch expand-region elm-mode dsvn direx dashboard company-tabnine browse-kill-ring))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
