@@ -10,6 +10,7 @@
 ;; F3 record macr F4 save macro / aply macro
 ;; you can cycle the macro ring
 
+(setq gc-cons-threshold (* 100 1024 1024))
 (require 'package)
 (add-to-list 'package-archives
 ;;            '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
@@ -25,13 +26,11 @@
 	 haskell-mode
 	 which-key
 	 move-text
-	 expand-region
 	 multiple-cursors
 	 company
 	 direx
 	 smex
 	 popwin
-	 simple-modeline
 	 ace-window
 	 dsvn
 	 hasky-stack
@@ -42,7 +41,6 @@
 	 smyx-theme
 	 ido
 	 fzf
-	 hydra
 	 rainbow-delimiters
 	 swiper
 	 use-package
@@ -50,9 +48,8 @@
 	 projectile
 	 undo-tree
 	 anzu
-	 beacon
-	 origami
 	 evil
+	 powerline
 	 ))
 
 
@@ -60,10 +57,6 @@
 
 
 
-;; as a result of the tortuous process to realize that emacs is the best environment for haskell
-;; i record here that one must set a hie.yaml file in the root of a project for it to actually work
-;; also its necesary to install haskell ide engine and haskell language server
-;; and also install lsp ui lsp mode and lsp haskell
 
 
 					; activate all the packages
@@ -78,13 +71,7 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'smyx t)
-
-(let ((filename "~/.emacs.d/startup.txt"))
-  (when (file-exists-p filename)
-    (setq initial-buffer-choice filename)))
-
 
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
 		    (not (gnutls-available-p))))
@@ -121,18 +108,15 @@ There are two things you can do about this warning:
 ;;(require 'dashboard)
 ;;(require 'projectile)
 ;;(require 'use-package)
-(require 'origami)
 (require 'evil)
-
+(require 'powerline)
+(powerline-default-theme)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 
 
 ;; interface
 (evil-mode 1)
-
-(global-origami-mode)
-(beacon-mode 1)
 (global-anzu-mode +1)
 (global-undo-tree-mode)
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -160,7 +144,6 @@ There are two things you can do about this warning:
 (setq company-tooltip-align-annotations t)
 (move-text-default-bindings)
 (ido-mode t)
-(simple-modeline-mode)
 (put 'upcase-region 'disabled nil)
 (setq visible-bell 1)
 (setq split-width-threshold nil) ;;for vertical split.
@@ -186,10 +169,6 @@ There are two things you can do about this warning:
     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
-
-;; Rust
-(setq racer-rust-src-path "/home/juicyjouissance/rust-src/rust/src")
-(add-hook 'rust-mode-hook 'company-mode)
 
 ;; Python
 (add-hook 'python-mode-hook 'company-mode)
@@ -254,38 +233,11 @@ There are two things you can do about this warning:
   )
 
 
-;; Elixir
-;;(add-hook 'elixir-mode-hook 'alchemist-mode)
-;;(add-hook 'alchemist-mode-hook 'company-mode)
-
 ;; ELisp
 ;; Lisp
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-	 
-
 (setq inferior-lisp-program "sbcl")
-
-;; Scheme
-(setq scheme-program-name "guile")
-;; This hook lets you use your theme colours instead of quack's ones.
-;; use run-scheme to bring repl,
-
-(defun scheme-mode-quack-hook ()
-  (require 'quack)
-  (setq quack-fontify-style 'emacs)
-  (setq quack-default-program "guile"))
-
-
-(add-hook 'scheme-mode-hook 'scheme-mode-quack-hook 'rainbow-delimiters)
-
-
-;; Projectile
-;;(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-;;(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-
-
-
 
 ;; MY CUSTOM BINDS
 (define-prefix-command 'custom-mapl)
@@ -302,11 +254,10 @@ There are two things you can do about this warning:
 (define-key custom-mapl (kbd "e") 'mc/edit-lines)
 (define-key custom-mapl (kbd "1") 'mc/mark-previous-like-this)
 (define-key custom-mapl (kbd "2") 'mc/mark-next-like-this)
-(define-key custom-mapl (kbd "3") 'er/expand-region)
 (define-key custom-mapl (kbd "l") 'mc/mark-all-like-this)
 (define-key custom-mapl (kbd "s") 'hasky-stack-execute)
 (define-key custom-mapl (kbd "S") 'flx-isearch-forward)
-;;(define-key custom-mapl (kbd "SPC") 'company-capf)
+(define-key custom-mapl (kbd "SPC") 'company-capf)
 (define-key custom-mapl (kbd "j") 'haskell-mode-jump-to-def)
 (define-key custom-mapl (kbd "a") 'ace-window)
 (define-key custom-mapl (kbd "x") 'other-window)
@@ -320,12 +271,8 @@ There are two things you can do about this warning:
 (define-key custom-mapl (kbd "q r y") 'yank-rectangle)
 (define-key custom-mapl (kbd "u") 'delete-other-windows)
 
-
-(global-set-key (kbd "C-z") custom-mapl)
-(global-set-key (kbd "C-SPC") 'evil-normal-state)
-
+;;(global-set-key (kbd "C-SPC") 'evil-normal-state)
 (global-set-key (kbd "º") custom-mapl)
-
 (global-set-key (kbd "ç") 'insert-lambda)
 
 (defun insert-lambda ()
@@ -336,37 +283,12 @@ There are two things you can do about this warning:
 
 
 ;; moves
-(global-set-key (kbd "<f11>") 'previous-line )
-(global-set-key (kbd "<f10>") 'next-line )
-(global-set-key (kbd "<f9>") 'backward-char)
-(global-set-key (kbd "<f12>") 'forward-char)
-(global-set-key (kbd "C-<f11>") 'backward-sentence )
-(global-set-key (kbd "C-<f10>") 'forward-sentence )
-(global-set-key (kbd "C-<f9>") 'backward-word)
-(global-set-key (kbd "C-<f12>") 'forward-word)
-
+(global-set-key (kbd "C-<f11>") 'shrink-window-horizontally)
+(global-set-key (kbd "C-<f10>") 'enlarge-window-horizontally )
+(global-set-key (kbd "C-<f9>") 'shrink-window)
+(global-set-key (kbd "C-<f12>") 'enlarge-window)
 (global-set-key (kbd "<f8>") 'menu-bar-open)
 
-;; Hydras
-
-(defhydra nav (global-map "ESC SPC")
-  "nav"
-  ("j" previous-line "nl")
-  ("k" next-line  "pl")
-  ("h" backward-char "bc")
-  ("l" forward-char "fc")
-  ("n" backward-word "bw")
-  ("." forward-word "fw")
-  ("m" backward-sentence "bs")
-  ("," forward-sentence "fs")
-  ("SPC" set-mark-command "ma")
-  ("g" keyboard-quit "kq")
-  ("C-<left>" shrink-window-horizontally "swh")
-  ("C-<right>" enlarge-window-horizontally "ewh")
-  ("C-<down>" shrink-window "swv")
-  ("C-<up>" enlarge-window "ewv")
-  ("i" nil "eh")
-  )
 
 ;; Globals
 (global-set-key (kbd "M-x") 'smex)
@@ -381,3 +303,18 @@ There are two things you can do about this warning:
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (which-key use-package treemacs swiper smyx-theme smex sly rainbow-delimiters projectile powerline popwin popup noctilux-theme names multiple-cursors move-text magit hasky-stack haskell-mode fzf flx evil elm-mode dsvn direx dashboard company browse-kill-ring anzu))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(setq gc-cons-threshold 800000)
