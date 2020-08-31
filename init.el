@@ -53,26 +53,19 @@
 	 evil-multiedit
 	 ))
 
-
-
-
-
-
-
-
-					; activate all the packages
+;; activate all the packages
 (package-initialize)
 
-					; fetch the list of packages available
+; fetch the list of packages available
 (unless package-archive-contents
   (package-refresh-contents))
 
-					; install the missing packages
+; install the missing packages
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
 
-(load-theme 'smyx t)
+(load-theme 'gruvbox t)
 
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
 		    (not (gnutls-available-p))))
@@ -91,30 +84,13 @@ There are two things you can do about this warning:
 
 
 ;; Global requires
-;;(require 'multiple-cursors)
-;;(require 'elm-mode)
 (require 'haskell-mode)
-;;(require 'ido)
-;;(require 'direx)
 (require 'popwin)
-;;(require 'vc-svn)
-;;(require 'ace-window)
-;;(require 'expand-region)
-;;(require 'color)
-;;(require 'cl)
-;;(require 'dsvn)
-;;(require 'view)
-;;(require 'org)
-;;(require 'dashboard)
-;;(require 'projectile)
-;;(require 'use-package)
 (require 'evil)
 (require 'evil-mc)
-;;(powerline-default-theme)
 (require 'treemacs-evil)
-;;(powerline-nano-theme)
 (require 'evil-multiedit)
-
+(require 'hydra)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 
@@ -125,21 +101,17 @@ There are two things you can do about this warning:
 (global-anzu-mode +1)
 (global-undo-tree-mode)
 (defalias 'yes-or-no-p 'y-or-n-p)
+;; dashboard
 (setq dashboard-items '((recents . 5)
 			(projects . 5)
 			(agenda . 10)
  			))
 (global-evil-mc-mode 1)
 (setq org-agenda-files '("~/org/tasks.org" "~/org/casita.org"))
-
 (dashboard-setup-startup-hook)
-
-
-
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
-;;(display-time-mode 1)
 (setq column-number-mode t)
 (set-face-foreground 'highlight nil)
 (global-hl-line-mode 1)
@@ -153,19 +125,15 @@ There are two things you can do about this warning:
 (setq visible-bell 1)
 (setq split-width-threshold nil) ;;for vertical split.
 ;;(setq split-width-threshold 1 ) ;;for horizontal split.
-
-
 (add-to-list 'default-frame-alist
 	     '(vertical-scroll-bars . nil))
 (setq scroll-step 1) ;; keyboard scroll one line at a time
-(setq display-line-numbers-current-absolute t)
 (setq company-show-numbers t)
 (setq company-idle-delay nil)
 (setq company-minimum-prefix-length 1)
 (setq-default left-margin-width 1 right-margin-width 1)
 (show-paren-mode t)
 (set-face-italic-p 'italic nil)
-
 (evil-define-key 'visual evil-mc-key-map
   "A" #'evil-mc-make-cursor-in-visual-selection-end
   "I" #'evil-mc-make-cursor-in-visual-selection-beg)
@@ -293,7 +261,15 @@ There are two things you can do about this warning:
   (insert "\\")
 )
 
+;; my "leader"
 
+
+(defhydra leader (evil-normal-state-map "SPC")
+  "BRRRUUUUUMMMM"
+  ("t" treemacs "tree :V")
+  ("b" buffer-menu "buffer menu")
+  ("f" fzf-directory "find filerinos :o")
+  )
 
 ;; moves
 (global-set-key (kbd "<f11>") 'shrink-window-horizontally)
