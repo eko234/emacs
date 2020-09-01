@@ -51,7 +51,9 @@
 	 evil
 	 evil-mc
 	 evil-multiedit
+	 linum-relative 
 	 ))
+
 
 ;; activate all the packages
 (package-initialize)
@@ -91,6 +93,7 @@ There are two things you can do about this warning:
 (require 'treemacs-evil)
 (require 'evil-multiedit)
 (require 'hydra)
+(require 'linum-relative)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 
@@ -137,13 +140,17 @@ There are two things you can do about this warning:
 (evil-define-key 'visual evil-mc-key-map
   "A" #'evil-mc-make-cursor-in-visual-selection-end
   "I" #'evil-mc-make-cursor-in-visual-selection-beg)
-
+;;(nlinum-relative-setup-evil)                    ;; setup for evil
+;;(add-hook 'prog-mode-hook 'nlinum-relative-mode)
+;;(setq nlinum-relative-redisplay-delay 0)      ;; delay
+;;(setq nlinum-relative-current-symbol "->")      ;; or "" for display current line number
+;;(setq nlinum-relative-offset 0)                 ;; 1 if you want 0, 2, 3...
 ;; special-evil-buffers
 (add-to-list 'evil-emacs-state-modes 'haskell-interactive-mode)
 (add-to-list 'evil-emacs-state-modes 'haskell-error-mode)
 (add-to-list 'evil-insert-state-modes 'dashboard-mode)
 ;; remember to add this thing to fix fucked parens in modes like this haskell-indentation-common-electric-command
-
+(add-hook 'prog-mode-hook 'linum-relative-mode)
 
 ;; Org
 (defun org-summary-todo (n-done n-not-done)
@@ -294,3 +301,20 @@ There are two things you can do about this warning:
 
 
 
+
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (linum-relative white-sand-theme which-key warm-night-theme use-package treemacs-evil toxi-theme tao-theme swiper suscolors-theme sunburn-theme sublime-themes srcery-theme sourcerer-theme smyx-theme smooth-scrolling smex smart-mode-line sly slime-theme slime silkworm-theme rimero-theme rainbow-delimiters purp-theme punpun-theme projectile powerline popwin popup poet-theme planet-theme panda-theme paganini-theme nofrils-acme-theme noctilux-theme nlinum-relative nlinum-hl nimbus-theme names multiple-cursors move-text mellow-theme majapahit-theme magit liso-theme labburn-theme kaolin-themes inverse-acme-theme hasky-stack haskell-mode hamburger-menu hamburg-theme gruvbox-theme grayscale-theme fzf flx firecode-theme eziam-theme evil-multiedit evil-mc evil-leader elm-mode dsvn direx dashboard darkburn-theme danneskjold-theme creamsody-theme contrast-color constant-theme company colorless-themes colonoscopy-theme brutalist-theme browse-kill-ring boron-theme berrys-theme badger-theme avk-emacs-themes autumn-light-theme anzu almost-mono-themes alect-themes acme-theme abyss-theme))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil)))))
