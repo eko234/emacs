@@ -15,8 +15,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
-
-; List the packages you want
+; List 
 (setq package-list
       '( elm-mode
 	 haskell-mode
@@ -53,7 +52,7 @@
 	 magit
 	 ))
 
-;; activate all the packages
+;; Activate all the packages
 (package-initialize)
 
 ; fetch the list of packages available
@@ -67,20 +66,6 @@
 
 (load-theme 'gruvbox t)
 
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-		    (not (gnutls-available-p))))
-       (proto (if no-ssl "http" "https")))
-    (when no-ssl (warn "\
-Your version of Emacs does not support SSL connections,
-which is unsafe because it allows man-in-the-middle attacks.
-There are two things you can do about this warning:
-1. Install an Emacs version that does support SSL and be safe.
-2. Remove this warning from your init file so you won't see it again."))
-    (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
-    ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
-    ;; and `package-pinned-packages`. Most users will not need or want to do this.
-    ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
-    )
 
 ;; Requires
 (require 'haskell-mode)
@@ -94,10 +79,11 @@ There are two things you can do about this warning:
 (require 'evil-surround)
 (require 'evil-numbers)
 (require 'magit)
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 
 ;; interface
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(setq evil-ex-visual-char-range t)
 (setq global-evil-surround-mode 1)
 (evil-multiedit-default-keybinds)
 (evil-mode 1)
@@ -220,7 +206,6 @@ There are two things you can do about this warning:
     )
   )
 
-
 ;; ELisp
 ;; Lisp
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
@@ -257,12 +242,7 @@ There are two things you can do about this warning:
 (define-key custom-mapl (kbd "1") 'evil-mc-make-and-goto-prev-match)
 (define-key custom-mapl (kbd "2") 'evil-mc-make-and-goto-next-match)
 (global-set-key (kbd "º") custom-mapl)
-(global-set-key (kbd "ç") 'insert-lambda)
 
-(defun insert-lambda ()
-  (interactive)
-  (insert "\\")
-)
 
 ;; My "leader"
 (defhydra leader (evil-normal-state-map "SPC")
@@ -272,6 +252,10 @@ There are two things you can do about this warning:
   ("f" fzf-directory "find filerinos :o")
   ("+" evil-numbers/inc-at-pt "increaso pawa")
   ("-" evil-numbers/dec-at-pt "decreaso pawa")
+  ("z" undo-tree-visualize ":)")
+  ("m" magit ":D")
+  ("j" move-text-down "v")
+  ("k" move-text-up   "^")
   )
 
 ;; Moves
@@ -280,8 +264,6 @@ There are two things you can do about this warning:
 (global-set-key (kbd "<f9>") 'shrink-window)
 (global-set-key (kbd "<f12>") 'enlarge-window)
 (global-set-key (kbd "<f8>") 'menu-bar-open)
-(global-set-key (kbd "M-<f11>") 'move-text-up)
-(global-set-key (kbd "M-<f12>") 'move-text-down)
 
 ;; Globals
 (global-set-key (kbd "M-x") 'smex)
