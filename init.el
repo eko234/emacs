@@ -99,7 +99,6 @@ There are two things you can do about this warning:
 (require 'hydra)
 (require 'linum-relative)
 (require 'evil-surround)
-(require 'all-the-icons)
 (require 'evil-numbers)
 (require 'magit)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
