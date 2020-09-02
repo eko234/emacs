@@ -1,11 +1,7 @@
-;; some useful stuff
-;; Meslo LGL
 ;; META
 ;; t transpose
-;; h mark paragraph
 ;; % query replace
 ;; s-o list of regex matching lines
-;; x h select all\
 ;; C-u C-s regex search
 ;; F3 record macr F4 save macro / aply macro
 ;; you can cycle the macro ring
@@ -57,8 +53,6 @@
 	 magit
 	 ))
 
-
-
 ;; activate all the packages
 (package-initialize)
 
@@ -88,8 +82,7 @@ There are two things you can do about this warning:
     ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
     )
 
-
-;; Global requires
+;; Requires
 (require 'haskell-mode)
 (require 'popwin)
 (require 'evil)
@@ -111,7 +104,7 @@ There are two things you can do about this warning:
 (global-anzu-mode +1)
 (global-undo-tree-mode)
 (defalias 'yes-or-no-p 'y-or-n-p)
-;; dashboard
+;; Dashboard
 (setq dashboard-startup-banner nil)
 (setq dashboard-items '((recents . 5)
 			(projects . 5)
@@ -121,6 +114,8 @@ There are two things you can do about this warning:
 (global-evil-mc-mode 1)
 (setq org-agenda-files '("~/org/tasks.org" "~/org/casita.org"))
 (dashboard-setup-startup-hook)
+(setq dashboard-init-info ":V")
+(setq dashboard-footer-messages '("Bloat"))
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
@@ -170,7 +165,6 @@ There are two things you can do about this warning:
 (setq python-shell-interpreter "python3")
 (setq python-indent-offset 2)
 
-
 ;; Elm
 (add-hook 'elm-mode-hook 'company-mode)
 
@@ -178,9 +172,7 @@ There are two things you can do about this warning:
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'haskell-mode-hook 'haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'company-mode)
-;;(setq haskell-interactive-popup-errors nil)
 ;;(add-hook 'haskell-interactive-mode-hook 'company-mode)
-
 (setq haskell-doc-prettify-types t)
 (setq haskell-doc-show-global-types t)
 (setq haskell-doc-show-user-defined t)
@@ -264,7 +256,6 @@ There are two things you can do about this warning:
 (define-key custom-mapl (kbd "u") 'delete-other-windows)
 (define-key custom-mapl (kbd "1") 'evil-mc-make-and-goto-prev-match)
 (define-key custom-mapl (kbd "2") 'evil-mc-make-and-goto-next-match)
-;;(global-set-key (kbd "C-SPC") 'evil-normal-state)
 (global-set-key (kbd "º") custom-mapl)
 (global-set-key (kbd "ç") 'insert-lambda)
 
@@ -273,9 +264,7 @@ There are two things you can do about this warning:
   (insert "\\")
 )
 
-;; my "leader"
-
-
+;; My "leader"
 (defhydra leader (evil-normal-state-map "SPC")
   "BRRRUUUUUMMMM"
   ("t" treemacs "tree :V")
@@ -285,7 +274,7 @@ There are two things you can do about this warning:
   ("-" evil-numbers/dec-at-pt "decreaso pawa")
   )
 
-;; moves
+;; Moves
 (global-set-key (kbd "<f11>") 'shrink-window-horizontally)
 (global-set-key (kbd "<f10>") 'enlarge-window-horizontally )
 (global-set-key (kbd "<f9>") 'shrink-window)
@@ -305,7 +294,3 @@ There are two things you can do about this warning:
 (push '(direx:direx-mode :position left :width 50 :dedicated t)
       popwin:special-display-config)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
-
-
-
-
