@@ -10,7 +10,7 @@
 ;; F3 record macr F4 save macro / aply macro
 ;; you can cycle the macro ring
 
-(setq gc-cons-threshold (* 102 1024 1024))
+(setq gc-cons-threshold (* 100 1024 1024))
 (require 'package)
 (add-to-list 'package-archives
 ;;            '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
