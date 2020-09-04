@@ -91,6 +91,7 @@
 (global-anzu-mode +1)
 (global-undo-tree-mode)
 (defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; Dashboard
 (setq dashboard-startup-banner nil)
 (setq dashboard-items '((recents . 5)
@@ -137,7 +138,8 @@
 (add-to-list 'evil-insert-state-modes 'dashboard-mode)
 ;; remember to add this thing to fix fucked parens in modes like this haskell-indentation-common-electric-command
 (add-hook 'prog-mode-hook 'linum-relative-mode)
-
+(setq linum-update-current t)
+(setq linum-relative-current-symbol "")
 
 ;; Org
 (defun org-summary-todo (n-done n-not-done)
