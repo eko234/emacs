@@ -30,7 +30,6 @@
 	 hasky-stack
 	 browse-kill-ring
 	 treemacs
-	 treemacs-evil
 	 sly
 	 ace-window
 	 smyx-theme
@@ -43,19 +42,21 @@
 	 projectile
 	 undo-tree
 	 anzu
+	 magit
+	 linum-relative 
+	 ;; Evil Packages
 	 evil
 	 evil-mc
+	 treemacs-evil
 	 evil-multiedit
-	 linum-relative 
 	 evil-surround
 	 evil-numbers
-	 magit
 	 evil-magit
+	 evil-visualstar
 	 ))
 
 ;; Activate all the packages
 (package-initialize)
-
 ; fetch the list of packages available
 (unless package-archive-contents
   (package-refresh-contents))
@@ -67,31 +68,40 @@
 
 (load-theme 'gruvbox t)
 
-
 ;; Requires
 (require 'haskell-mode)
 (require 'popwin)
+(require 'hydra)
+(require 'linum-relative)
+(require 'magit)
+;; Evil Requires
 (require 'evil)
 (require 'evil-mc)
 (require 'treemacs-evil)
 (require 'evil-multiedit)
-(require 'hydra)
-(require 'linum-relative)
 (require 'evil-surround)
 (require 'evil-numbers)
-(require 'magit)
 (require 'evil-magit)
 
 ;; interface
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(setq evil-ex-visual-char-range t)
-(setq global-evil-surround-mode 1)
-(evil-multiedit-default-keybinds)
-(evil-mode 1)
 (global-anzu-mode +1)
 (global-undo-tree-mode)
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; Evil things
+(setq evil-ex-visual-char-range t)
+(setq global-evil-surround-mode 1)
+(evil-multiedit-default-keybinds)
+(evil-mode 1)
+(global-evil-mc-mode 1)
+(evil-define-key 'visual evil-mc-key-map
+  "A" #'evil-mc-make-cursor-in-visual-selection-end
+  "I" #'evil-mc-make-cursor-in-visual-selection-beg)
+(add-to-list 'evil-emacs-state-modes 'haskell-interactive-mode)
+(add-to-list 'evil-emacs-state-modes 'haskell-error-mode)
+(add-to-list 'evil-insert-state-modes 'dashboard-mode)
+(global-evil-visualstar-mode)
 ;; Dashboard
 (setq dashboard-startup-banner nil)
 (setq dashboard-items '((recents . 5)
@@ -99,10 +109,8 @@
 			(agenda . 10)
  			))
 (setq treemacs-no-png-images t)
-(global-evil-mc-mode 1)
 (setq org-agenda-files '("~/org/tasks.org" "~/org/casita.org"))
 (dashboard-setup-startup-hook)
-(setq dashboard-init-info ":V")
 (setq dashboard-footer-messages '("Thanks Richard Stallman"))
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
@@ -129,13 +137,7 @@
 (setq-default left-margin-width 1 right-margin-width 1)
 (show-paren-mode t)
 (set-face-italic-p 'italic nil)
-(evil-define-key 'visual evil-mc-key-map
-  "A" #'evil-mc-make-cursor-in-visual-selection-end
-  "I" #'evil-mc-make-cursor-in-visual-selection-beg)
 (setq scroll-margin 4)
-(add-to-list 'evil-emacs-state-modes 'haskell-interactive-mode)
-(add-to-list 'evil-emacs-state-modes 'haskell-error-mode)
-(add-to-list 'evil-insert-state-modes 'dashboard-mode)
 ;; remember to add this thing to fix fucked parens in modes like this haskell-indentation-common-electric-command
 (add-hook 'prog-mode-hook 'linum-relative-mode)
 (setq linum-update-current t)
@@ -245,16 +247,14 @@
 (define-key custom-mapl (kbd "1") 'evil-mc-make-and-goto-prev-match)
 (define-key custom-mapl (kbd "2") 'evil-mc-make-and-goto-next-match)
 (global-set-key (kbd "º") custom-mapl)
-(global-set-key (kbd "ñ") custom-mapl)
 ;; My "leader"
-
-(defhydra leader (evil-normal-state-map "SPC")
+(define-key evil-normal-state-map (kbd "SPC") 'custom-mapl)
+(defhydra brutus (evil-normal-state-map "ñ")
   "BRRRUUUUUMMMM"
   ("+" evil-numbers/inc-at-pt "increaso pawa")
   ("-" evil-numbers/dec-at-pt "decreaso pawa")
   )
 ;; moves
-
 (global-set-key (kbd "M-¡") 'move-text-down)
 (global-set-key (kbd "M-¿") 'move-text-up)
 (global-set-key (kbd "<f11>") 'shrink-window-horizontally)
