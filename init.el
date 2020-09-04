@@ -50,6 +50,7 @@
 	 evil-surround
 	 evil-numbers
 	 magit
+	 evil-magit
 	 ))
 
 ;; Activate all the packages
@@ -79,7 +80,7 @@
 (require 'evil-surround)
 (require 'evil-numbers)
 (require 'magit)
-
+(require 'evil-magit)
 
 ;; interface
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -101,7 +102,7 @@
 (setq org-agenda-files '("~/org/tasks.org" "~/org/casita.org"))
 (dashboard-setup-startup-hook)
 (setq dashboard-init-info ":V")
-(setq dashboard-footer-messages '("Bloat"))
+(setq dashboard-footer-messages '("Thanks Richard Stallman"))
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
@@ -242,23 +243,18 @@
 (define-key custom-mapl (kbd "1") 'evil-mc-make-and-goto-prev-match)
 (define-key custom-mapl (kbd "2") 'evil-mc-make-and-goto-next-match)
 (global-set-key (kbd "º") custom-mapl)
-
-
+(global-set-key (kbd "ñ") custom-mapl)
 ;; My "leader"
+
 (defhydra leader (evil-normal-state-map "SPC")
   "BRRRUUUUUMMMM"
-  ("t" treemacs "tree :V")
-  ("b" buffer-menu "buffer menu")
-  ("f" fzf-directory "find filerinos :o")
   ("+" evil-numbers/inc-at-pt "increaso pawa")
   ("-" evil-numbers/dec-at-pt "decreaso pawa")
-  ("z" undo-tree-visualize ":)")
-  ("m" magit ":D")
-  ("j" move-text-down "v")
-  ("k" move-text-up   "^")
   )
+;; moves
 
-;; Moves
+(global-set-key (kbd "M-¡") 'move-text-down)
+(global-set-key (kbd "M-¿") 'move-text-up)
 (global-set-key (kbd "<f11>") 'shrink-window-horizontally)
 (global-set-key (kbd "<f10>") 'enlarge-window-horizontally )
 (global-set-key (kbd "<f9>") 'shrink-window)
