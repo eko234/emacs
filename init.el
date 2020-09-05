@@ -53,6 +53,8 @@
 	 evil-numbers
 	 evil-magit
 	 evil-visualstar
+	 evil-org
+	
 	 ))
 
 ;; Activate all the packages
@@ -75,6 +77,7 @@
 (require 'linum-relative)
 (require 'magit)
 ;; Evil Requires
+;;(setq evil-want-C-i-jump nil)
 (require 'evil)
 (require 'evil-mc)
 (require 'treemacs-evil)
@@ -112,6 +115,13 @@
 (setq org-agenda-files '("~/org/tasks.org" "~/org/casita.org"))
 (dashboard-setup-startup-hook)
 (setq dashboard-footer-messages '("Thanks Richard Stallman"))
+;;
+(require 'evil-org)
+(add-hook 'org-mode-hook 'evil-org-mode)
+(evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+(require 'evil-org-agenda)
+(evil-org-agenda-set-keys)
+;; UI
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
@@ -254,15 +264,13 @@
   ("+" evil-numbers/inc-at-pt "increaso pawa")
   ("-" evil-numbers/dec-at-pt "decreaso pawa")
   )
+
 ;; moves
-(global-set-key (kbd "M-¡") 'move-text-down)
-(global-set-key (kbd "M-¿") 'move-text-up)
 (global-set-key (kbd "<f11>") 'shrink-window-horizontally)
 (global-set-key (kbd "<f10>") 'enlarge-window-horizontally )
 (global-set-key (kbd "<f9>") 'shrink-window)
 (global-set-key (kbd "<f12>") 'enlarge-window)
 (global-set-key (kbd "<f8>") 'menu-bar-open)
-
 ;; Globals
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
