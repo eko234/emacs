@@ -1,3 +1,5 @@
+;; Could it be possible to really emulate kakoune with zones?
+
 (require 'package)
 
 (setq gc-cons-threshold (* 100 1024 1024))
